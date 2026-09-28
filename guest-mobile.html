@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Tamu Mandiri</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="mobile-body">
+    <div class="mobile-shell">
+      <header class="mobile-header">
+        <p class="eyebrow">Self service</p>
+        <h1>Isi Kehadiran</h1>
+      </header>
+
+      <main class="mobile-card">
+        <form id="guestMobileForm" class="mobile-form">
+          <div class="field-grid">
+            <label>
+              <span>Nama</span>
+              <input type="text" id="mobileName" placeholder="Masukkan nama lengkap" required />
+            </label>
+
+            <label>
+              <span>Nomor HP</span>
+              <input type="tel" id="mobilePhone" placeholder="Contoh: 0812xxxx" required />
+            </label>
+          </div>
+
+          <div class="field-grid">
+            <label>
+              <span>Instansi / Perusahaan</span>
+              <input type="text" id="mobileCompany" placeholder="Contoh: PT Maju Jaya" required />
+            </label>
+
+            <label>
+              <span>Tujuan</span>
+              <input type="text" id="mobilePurpose" placeholder="Contoh: Kunjungan kerja" required />
+            </label>
+          </div>
+
+          <div class="camera-panel mobile-camera-panel">
+            <div class="camera-header">
+              <span>Foto tamu</span>
+              <div class="camera-actions">
+                <button type="button" id="mobileStartCameraBtn" class="secondary-btn">Aktifkan kamera</button>
+                <button type="button" id="mobileCapturePhotoBtn" class="secondary-btn" disabled>Ambil foto</button>
+              </div>
+            </div>
+
+            <div class="camera-box mobile-camera-box">
+              <video id="mobileCameraPreview" autoplay playsinline muted></video>
+              <canvas id="mobilePhotoCanvas" width="640" height="480"></canvas>
+              <img id="mobilePhotoPreview" alt="Preview foto tamu" hidden />
+            </div>
+          </div>
+
+          <label>
+            <span>Catatan</span>
+            <textarea id="mobileNotes" rows="4" placeholder="Catatan tambahan atau kebutuhan lain..."></textarea>
+          </label>
+
+          <div class="auto-time-box mobile-auto-time-box" aria-live="polite">
+            <div>
+              <span>Hari</span>
+              <strong id="mobileAutoDay">-</strong>
+            </div>
+            <div>
+              <span>Tanggal</span>
+              <strong id="mobileAutoDate">-</strong>
+            </div>
+            <div>
+              <span>Tahun</span>
+              <strong id="mobileAutoYear">-</strong>
+            </div>
+          </div>
+
+          <button type="submit" class="primary-btn mobile-submit-btn">Simpan Data</button>
+
+          <p id="mobileMessage" class="mobile-message" aria-live="polite"></p>
+        </form>
+
+        <div id="successState" class="success-state hidden" aria-live="polite">
+          <div class="success-icon">✓</div>
+          <h2>Data Terkirim</h2>
+          <p>Terima kasih, data kehadiran Anda berhasil terkirim.</p>
+          <button type="button" id="newGuestBtn" class="primary-btn mobile-submit-btn">Isi data lain</button>
+        </div>
+      </main>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="guest-mobile.js"></script>
+  </body>
+</html>

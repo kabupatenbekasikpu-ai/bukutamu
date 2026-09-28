@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Tamu Tersimpan</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container page-saved-data">
+      <header class="header header-saved">
+        <div>
+          <p class="eyebrow">Reservasi & kehadiran</p>
+          <h1>Data Tamu Tersimpan</h1>
+        </div>
+        <div class="header-actions">
+          <a href="index.html" class="nav-btn">Kembali ke form</a>
+        </div>
+      </header>
+
+      <section class="card saved-page-card">
+        <div class="saved-toolbar">
+          <div class="filter-box">
+            <label for="savedYearFilter">Tahun</label>
+            <select id="savedYearFilter"></select>
+          </div>
+          <div class="filter-box">
+            <label for="savedMonthFilter">Bulan</label>
+            <select id="savedMonthFilter">
+              <option value="all">Semua bulan</option>
+              <option value="0">Januari</option>
+              <option value="1">Februari</option>
+              <option value="2">Maret</option>
+              <option value="3">April</option>
+              <option value="4">Mei</option>
+              <option value="5">Juni</option>
+              <option value="6">Juli</option>
+              <option value="7">Agustus</option>
+              <option value="8">September</option>
+              <option value="9">Oktober</option>
+              <option value="10">November</option>
+              <option value="11">Desember</option>
+            </select>
+          </div>
+          <button type="button" id="savedDownloadBtn" class="download-btn">Download Excel</button>
+        </div>
+
+        <div class="saved-summary">
+          <div class="stat-box">
+            <span>Total data</span>
+            <strong id="savedTotalStat">0</strong>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="stats-table saved-table">
+            <thead>
+              <tr>
+                <th>Nama</th>
+                <th>Nomor HP</th>
+                <th>Instansi</th>
+                <th>Tujuan</th>
+                <th>Hari</th>
+                <th>Tanggal</th>
+                <th>Tahun</th>
+              </tr>
+            </thead>
+            <tbody id="savedDataBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="saved-data.js"></script>
+  </body>
+</html>

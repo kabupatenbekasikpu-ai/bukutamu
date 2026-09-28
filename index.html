@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buku Tamu</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <div>
+          <p class="eyebrow">Sistem administrasi</p>
+          <h1>Buku Tamu</h1>
+        </div>
+        <div class="header-actions">
+          <a href="guest-mobile.html" class="nav-btn">Tamu isi sendiri</a>
+          <a href="saved-data.html" class="nav-btn">Lihat data tersimpan</a>
+          <div class="badge" id="entryCount">0 tamu</div>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="card form-card">
+          <h2>Formulir Kehadiran</h2>
+
+          <form id="guestForm">
+            <div class="field-row two-cols">
+              <label>
+                <span>Nama</span>
+                <input type="text" id="name" placeholder="Masukkan nama lengkap" required />
+              </label>
+              <label>
+                <span>Nomor HP</span>
+                <input type="tel" id="phone" placeholder="Contoh: 0812xxxx" required />
+              </label>
+            </div>
+
+            <div class="field-row two-cols">
+              <label>
+                <span>Instansi / Perusahaan</span>
+                <input type="text" id="company" placeholder="Contoh: PT Maju Jaya" required />
+              </label>
+              <label>
+                <span>Tujuan</span>
+                <input type="text" id="purpose" placeholder="Contoh: Kunjungan kerja" required />
+              </label>
+            </div>
+
+            <div class="camera-panel">
+              <div class="camera-header">
+                <span>Foto tamu</span>
+                <div class="camera-actions">
+                  <button type="button" id="startCameraBtn" class="secondary-btn">Aktifkan kamera</button>
+                  <button type="button" id="capturePhotoBtn" class="secondary-btn" disabled>Ambil foto</button>
+                </div>
+              </div>
+
+              <div class="camera-box">
+                <video id="cameraPreview" autoplay playsinline muted></video>
+                <canvas id="photoCanvas" width="640" height="480"></canvas>
+                <img id="photoPreview" alt="Preview foto tamu" hidden />
+              </div>
+            </div>
+
+            <label>
+              <span>Catatan</span>
+              <textarea id="notes" rows="4" placeholder="Catatan tambahan atau kebutuhan lain..."></textarea>
+            </label>
+
+            <div class="auto-time-box" aria-live="polite">
+              <div>
+                <span>Hari</span>
+                <strong id="autoDay">-</strong>
+              </div>
+              <div>
+                <span>Tanggal</span>
+                <strong id="autoDate">-</strong>
+              </div>
+              <div>
+                <span>Tahun</span>
+                <strong id="autoYear">-</strong>
+              </div>
+            </div>
+
+            <button type="submit" class="primary-btn">Simpan Data</button>
+          </form>
+        </section>
+
+        <section class="card list-card">
+          <div class="list-header">
+            <h2>Daftar Tamu</h2>
+            <input type="search" id="searchInput" placeholder="Cari tamu..." aria-label="Cari tamu" />
+          </div>
+
+          <div id="guestList" class="guest-list" aria-live="polite"></div>
+        </section>
+      </main>
+
+      <section class="card dashboard-card">
+        <div class="dashboard-header">
+          <h2>Database Tamu</h2>
+          <div class="filter-box-wrap">
+            <div class="filter-box">
+              <label for="yearFilter">Pilih tahun</label>
+              <select id="yearFilter"></select>
+            </div>
+            <div class="filter-box">
+              <label for="monthFilter">Pilih bulan</label>
+              <select id="monthFilter">
+                <option value="all">Semua bulan</option>
+                <option value="0">Januari</option>
+                <option value="1">Februari</option>
+                <option value="2">Maret</option>
+                <option value="3">April</option>
+                <option value="4">Mei</option>
+                <option value="5">Juni</option>
+                <option value="6">Juli</option>
+                <option value="7">Agustus</option>
+                <option value="8">September</option>
+                <option value="9">Oktober</option>
+                <option value="10">November</option>
+                <option value="11">Desember</option>
+              </select>
+            </div>
+            <button type="button" id="downloadExcelBtn" class="download-btn">Download Excel</button>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <span>Total tamu</span>
+            <strong id="totalGuestsStat">0</strong>
+          </div>
+          <div class="stat-box">
+            <span>Hari tertinggi</span>
+            <strong id="peakDayStat">-</strong>
+          </div>
+          <div class="stat-box">
+            <span>Bulan tertinggi</span>
+            <strong id="peakMonthStat">-</strong>
+          </div>
+        </div>
+
+        <div class="chart-box">
+          <canvas id="guestChart" aria-label="Grafik tamu per bulan"></canvas>
+        </div>
+
+        <div class="table-wrap">
+          <table class="stats-table">
+            <thead>
+              <tr>
+                <th>Tanggal</th>
+                <th>Hari</th>
+                <th>Tahun</th>
+                <th>Jumlah</th>
+              </tr>
+            </thead>
+            <tbody id="dailyTableBody"></tbody>
+          </table>
+        </div>
+
+        <div class="detail-table-wrap">
+          <h3>Data Tamu Tersimpan</h3>
+          <table class="stats-table">
+            <thead>
+              <tr>
+                <th>Nama</th>
+                <th>Nomor HP</th>
+                <th>Instansi</th>
+                <th>Tujuan</th>
+                <th>Hari</th>
+                <th>Tanggal</th>
+                <th>Tahun</th>
+              </tr>
+            </thead>
+            <tbody id="savedGuestTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <template id="guestTemplate">
+      <article class="guest-item">
+        <div class="guest-top">
+          <div>
+            <h3 class="guest-name"></h3>
+            <p class="guest-company"></p>
+          </div>
+          <button class="delete-btn" type="button" aria-label="Hapus tamu">Hapus</button>
+        </div>
+
+        <div class="guest-detail">
+          <span>📞 <strong></strong></span>
+          <span>🎯 <strong></strong></span>
+        </div>
+
+        <p class="guest-date-meta"></p>
+        <div class="guest-photo" hidden></div>
+        <p class="guest-notes"></p>
+        <small class="guest-time"></small>
+      </article>
+    </template>
+
+    <script src="config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
